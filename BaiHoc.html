@@ -25,9 +25,7 @@
 
 
     <div class="container">
-
         <div class="left">
-
             <div class="video">
                 <iframe id="lessonVideo" width="100%" height="100%" frameboder = "0" allowfullscreen>
                     <source id="videoSrc" src="">
@@ -46,26 +44,19 @@
                 <div id="content">
                 </div>
             </div>
-
         </div>
 
-
         <div class="right">
-
             <div class="panel">
                 <h3>Nội dung khóa học</h3>
                 <div id="progressText"></div>
             </div>
-
             <div class="panel" id="lessonList"></div>
-
         </div>
-
     </div>
 
     <script>
         const courses = {
-        
             1: [
                 {
                     title:"HTML CSS Là Gì?",
@@ -403,28 +394,20 @@
             ]
         };
     
-    
         const p = new URLSearchParams(window.location.search);
         const courseId = p.get("id") || "1";
-    
         const lessons = courses[courseId];
-    
         let current = 0;  
         let completed = Number(localStorage.getItem("completed_" + courseId)) || 0;
     
-    
         function render(){
             const l = lessons[current];
-        
             document.getElementById("title").innerText = l.title;
             document.getElementById("desc").innerText = l.desc;
             document.getElementById("content").innerText = l.content;
-        
             document.getElementById("lessonVideo").src = l.video;
-        
             renderLessonList();
             updateProgress();
-
         }
 
         function renderLessonList(){
@@ -441,14 +424,12 @@
             document.getElementById("lessonList").innerHTML = html;
         }
     
-    
         function openLesson(i){
             if(i > current) return;
             current = i;
             localStorage.setItem("lesson_" + courseId, current);
             render();
         }
-    
     
         function nextLesson(){
             if(current >= completed){
@@ -475,27 +456,19 @@
                 completed++;
                 localStorage.setItem("completed_" + courseId, completed);
             }
-        
             if(current < lessons.length - 1){
                 current++;
             }
-        
             render();
         }
     
-    
-    
         function updateProgress(){
             let percent = (completed / lessons.length) * 100;
-        
             document.getElementById("percent").innerText = Math.floor(percent) + "%";
             document.getElementById("topBar").style.width = percent + "%";
-        
             document.getElementById("progressText").innerText = `Đã hoàn thành ${completed}/${lessons.length} bài`;
         }
-    
         render();
     </script>
-
 </body>
 </html>
