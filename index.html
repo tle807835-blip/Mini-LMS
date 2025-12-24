@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini LMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="nav-left">
+            <div class="logo"><img src="img/Logo.png" alt="Logo"></div>
+            <div class="nav-links">
+                <a class="page" href="#">Khóa Học</a>
+                <a href="#">Khóa Học Của Tôi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Khám phá kiến thức mới</h2>
+        <div class="sub">Trau dồi kỹ năng chuyên môn với hàng trăm khóa học hàng đầu từ các chuyên gia.</div>
+
+        <div class="search">
+            <input placeholder="Tìm kiếm khóa học theo tên, chủ đề…">
+        </div>
+
+        <div class="filter-chips">
+            <div class="chip active">Tất cả</div>
+            <div class="chip">C/C++</div>
+            <div class="chip">Java</div>
+            <div class="chip">Html/css</div>
+        </div>
+
+        <div class="courses">
+        
+            <div class="card" data-id="1">
+                <img src="img/html.css" alt="#">
+                <div class="card-content">
+                    <h3>Nhập môn HTML/CSS</h3>
+                    <p>Học lập trình từ cơ bản với HTML/CSS.</p>
+                    <div class="meta">
+                        <span>12 giờ</span>
+                    </div>
+                    <button>Xem chi tiết</button>
+                </div>
+            </div>
+
+            <div class="card" data-id="2">
+                <img src="img/c++.png" alt="">
+                <div class="card-content">
+                    <h3>Học C/C++ cơ bản</h3>
+                    <p>Cùng học thêm một ngôn ngữ mới.</p>
+                    <div class="meta">
+                        <span>18 giờ</span>
+                    </div>
+                    <button>Xem chi tiết</button>
+                </div>
+            </div>
+
+            <div class="card" data-id="3">
+                <img src="img/python.webp" alt="">
+                <div class="card-content">
+                    <h3>Python cho người mới bắt đầu</h3>
+                    <p>Khóa học này sẽ cung cấp kiến thức về Python.</p>
+                    <div class="meta">
+                        <span>18 giờ</span>
+                    </div>
+                    <button>Xem chi tiết</button>
+                </div>
+            </div>
+
+            <div class="card" data-id="4">
+                <img src="img/js.webp" alt="">
+                <div class="card-content">
+                    <h3>JavaScript cơ bản</h3>
+                    <p>Học Javascript cơ bản phù hợp cho người chưa từng học lập trình.</p>
+                    <div class="meta">
+                        <span>36 giờ</span>
+                    </div>
+                    <button>Xem chi tiết</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">© 2025 E-Learning. All rights reserved.</div>
+    </div>
+
+    <script>
+        const course = document.querySelectorAll(".card");
+        course.forEach(c => {
+            c.addEventListener("click", () => {
+                const id = c.getAttribute("data-id");
+                window.location.href = `BaiHoc.html?id=${id}`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Platform</title>
+    <link rel="stylesheet" href="BaiHoc.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+
+    <div class="nav">
+        <div class="head-left">
+            <div class="logo"><img src="img/Logo.png" alt="Logo"></div>
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Quay lại bảng điều khiển</a>
+        </div>
+
+        <div class="head-right">Hoàn thành: <b id="percent">0%</b>
+            <div class="progress-bar">
+                <div class="progress-bar-inner" id="topBar"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="left">
+
+            <div class="video">
+                <iframe id="lessonVideo" width="100%" height="100%" frameboder = "0" allowfullscreen>
+                    <source id="videoSrc" src="">
+                </iframe>
+            </div>
+
+            <div class="action-row">
+                <button class="btn prev" onclick="prevLesson()"><i class="fa-solid fa-arrow-left"></i> Bài trước</button>
+                <button class="btn complete" onclick="complete()"><i class="fa-solid fa-check"></i> Đánh dấu hoàn thành</button>
+                <button class="btn next" onclick="nextLesson()">Bài tiếp theo <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+
+            <div class="lesson-content">
+                <h2 id="title"></h2>
+                <p id="desc"></p>
+                <div id="content">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="right">
+
+            <div class="panel">
+                <h3>Nội dung khóa học</h3>
+                <div id="progressText"></div>
+            </div>
+
+            <div class="panel" id="lessonList"></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const courses = {
+        
+            1: [
+                {
+                    title:"HTML CSS Là Gì?",
+                    desc:"Giới thiệu HTML và CSS",
+                    content:`HTML là chữ viết tắt của Hypertext Markup Language. Nó giúp người dùng tạo và cấu trúc các thành phần trong trang web hoặc ứng dụng, phân chia các đoạn văn, deading, links, blockquotes, vv...
+                        CSS là ngôn ngữ tạo phong cách cho trang web - Cascading Style Sheet language. Nó dùng để tạo phong cách và định kiểu cho những yếu tố được viết dưới dạng ngôn ngữ đánh dấu, như là HTML.
+                    `,
+                    video:"//www.youtube.com/embed/zwsPND378OQ?si=NAQSK9ClTcjz3RtT"
+                },
+                {
+                    title:"Các Thẻ Cơ Bản Trong HTML",
+                    desc:"Học các thẻ thường dùng như h1, p, img, a...",
+                    content:`Trong bài này, bạn sẽ học các thẻ HTML thông dụng.
+
+                        Nội dung:
+                        - Thẻ tiêu đề: h1 → h6
+                        - Thẻ đoạn văn: p
+                        - Thẻ hình ảnh: img
+                        - Thẻ liên kết: a
+                        - Thẻ danh sách: ul, li
+                        - Thẻ bảng: table
+                        - Thẻ input
+                        - Thẻ button
+                        - Thẻ div
+
+                        Kết thúc bài, bạn có thể có thể hiểu về các thẻ trong HTML.
+                        `,
+                    video:"https://www.youtube.com/embed/AzmdwZ6e_aM?si=rdPKb89mqtJXbZOa"
+                },
+                {
+                    title:"Cách sử dụng CSS trong HTML",
+                    desc:"Làm quen với CSS và cách áp dụng vào HTML",
+                    content:`CSS giúp trang web đẹp hơn và chuyên nghiệp hơn.
+
+                        Nội dung:
+                        - 3 cách dùng CSS: inline, internal, external
+
+                        Sau bài này bạn sẽ biết cách sử dung CSS trong HTML.
+                        `,
+                        
+                    video:"https://www.youtube.com/embed/NsSsJTg29oE?si=OB7eA6jzjI5EETMP"
+                },
+                {
+                    title:"ID và Class trong CSS selectors",
+                    desc:"Cách sử dụng ID và Class",
+                    content:`Trong bài này chúng ta cùng tìm hiểu về khái niệm ID và Class trong CSS selectors. Cách sử dụng ID & Class.
+                        `,
+                    video:"https://www.youtube.com/embed/4J6d8cr0X48?si=oUF83B1ty8Dox89Z"
+                }
+            ],
+            
+            2: [
+                {
+                    title: "Làm Quen Với C++, Biến và Kiểu Dữ Liệu",
+                    desc: "Tìm hiểu biến, lưu trữ dữ liệu và các kiểu dữ liệu cơ bản",
+                    content: `Biến dùng để lưu trữ dữ liệu trong chương trình. Trong C++ có nhiều kiểu dữ liệu khác nhau.
+                
+                        Nội dung:
+                        - Biến là gì?
+                        - Kiểu dữ liệu int, float, char, double
+                        - Quy tắc đặt tên biến
+                        - Ý nghĩa của từng kiểu dữ liệu
+
+                        Sau bài này, bạn biết cách khai báo và sử dụng biến đúng cách.
+                        `,
+                    video: "https://www.youtube.com/embed/74B6PXO97Tw?si=smEhsLFswgS3d8gA"
+                },
+            
+                {
+                    title: "Toán Tử Trong C/C++",
+                    desc: "Làm việc với các phép toán cơ bản trong lập trình",
+                    content: `Toán tử giúp xử lý phép tính và so sánh dữ liệu.
+                
+                        Nội dung:
+                        - Toán tử số học: + - * /
+                        - Toán tử gán
+                        - Toán tử so sánh
+                        - Toán tử logic
+
+                        Kết thúc bài, bạn có thể thực hiện các phép tính cơ bản trong chương trình.
+                        `,
+                    video: "https://www.youtube.com/embed/y-_fNgvSfjc?si=EwCoCnVsD_r-VV4n"
+                },
+            
+                {
+                    title: "Cấu Trúc Rẽ Nhánh",
+                    desc: "if, else, else if và switch cas – xử lý điều kiện trong chương trình",
+                    content: `Điều kiện giúp chương trình xử lý nhiều trường hợp khác nhau.
+                
+                        Nội dung:
+                        - Ý nghĩa của điều kiện
+                        - if
+                        - if – else
+                        - else if
+                        - switch case
+
+                        Sau bài này, bạn có thể viết chương trình xử lý nhiều tình huống khác nhau.
+                        `,
+                    video: "https://www.youtube.com/embed/QH-nyFW3c0s?si=gWeAXYax3RT8Hdzu"
+                },
+            
+                {
+                    title: "Vòng Lặp",
+                    desc: "for, while, do while – lặp lại công việc tự động",
+                    content: `Vòng lặp giúp lặp đi lặp lại một đoạn chương trình.
+                
+                        Nội dung:
+                        - Vòng lặp for
+                        - Vòng lặp while
+                        - Vòng lặp do while
+
+                        Kết thúc bài, bạn có thể tạo chương trình chạy lặp hiệu quả.
+                        `,
+                    video: "https://www.youtube.com/embed/O0Q5K0m6mvY?si=Dt67bV64x-Ttc1ad"
+                },
+            
+                {
+                    title: "Hàm Trong C/C++",
+                    desc: "Hiểu khái niệm hàm và cách sử dụng trong chương trình",
+                    content: `Hàm giúp chia chương trình thành từng phần nhỏ, dễ quản lý và tái sử dụng.
+
+                        Nội dung:
+                        - Khai báo hàm
+                        - Định nghĩa hàm
+                        - Hàm có tham số & không tham số
+                        - Hàm có giá trị trả về (return)
+
+                        Sau bài học này, bạn sẽ biết cách tạo và sử dụng hàm để viết chương trình gọn hơn, khoa học hơn.
+                        `,
+                    video: "https://www.youtube.com/embed/UkX6o68LNMs?si=W32j1oUwG6q_T__n"
+                }
+            ],
+
+            3: [
+                {
+                    title: "Vì Sao Nên Học Ngôn Ngữ Python",
+                    desc: "Giới thiệu Python và lý do tại sao phải học Python",
+                    content: `Trong bài này bạn sẽ biết lý do để học Python và công cụ lập trình Python.
+                            
+                        Nội dung:
+                        - Lý do để học Python
+                        - Công cụ lập trình Python
+                        - Tài liệu học Python
+
+                        Sau bài học này, bạn hiểu tổng quan và lý do nên học Python.
+                        `,
+                    video: "https://www.youtube.com/embed/c2sorFXCLU4?si=glm0knOGykmNe9TB"
+                },
+            
+                    {
+                    title: "Câu Lệnh Print Trong Python",
+                    desc: "Làm quen với câu lệnh print và cách hiển thị dữ liệu",
+                    content: `print là câu lệnh quan trọng nhất giúp hiển thị kết quả ra màn hình trong Python.
+
+                        Nội dung:
+                        - Câu lệnh print
+
+                       Sau bài này bạn sẽ hiểu cách hiển thị dữ liệu ra màn hình trong Python.
+                        `,
+                    video: "https://www.youtube.com/embed/XMeYyJfbgpY?si=NN9bvn7fCoJE7qni"
+                },
+
+                {
+                    title: "Biến và Kiểu Dữ Liệu",
+                    desc: "Làm quen với biến và các kiểu dữ liệu cơ bản trong Python",
+                    content: `Biến dùng để lưu trữ dữ liệu. Python hỗ trợ nhiều kiểu dữ liệu giúp xử lý linh hoạt.
+                
+                        Nội dung:
+                        - Biến
+                        - Cách khai báo biến
+                        - Kiểu dữ liệu: int, float, string, bool
+
+                        Sau bài này, bạn biết cách tạo và dùng biến đúng cách.
+                        `,
+                    video: "https://www.youtube.com/embed/RDiL6VLud-Q?si=JrYRoryMvhfIhh-W"
+                },
+            
+                {
+                    title: "Toán Tử Trong Python",
+                    desc: "Sử dụng các phép toán và xử lý dữ liệu",
+                    content: `Toán tử giúp Python tính toán và so sánh dữ liệu.
+                
+                        Nội dung:
+                        - Toán tử số học: + - * /
+                        - Toán tử so sánh
+                        - Toán tử logic
+
+                        Kết thúc bài, bạn có thể xử lý phép tính và điều kiện cơ bản.
+                        `,
+                    video: "https://www.youtube.com/embed/r9vECIW0Z3M?si=pANJy9asRKCDfjJF"
+                },
+            
+                {
+                    title: "Câu Lệnh Điều Kiện",
+                    desc: "if, elif, else – quyết định chương trình chạy theo hướng nào",
+                    content: `Điều kiện giúp chương trình đưa ra lựa chọn.
+                
+                        Nội dung:
+                        - if – else
+                        - elif
+                        - shorthand if và toán tử 3 ngôi  
+
+                        Sau bài này, bạn có thể viết chương trình thông minh hơn.
+                        `,
+                    video: "https://www.youtube.com/embed/zWbdV8ukRg0?si=Wmw2sIrfkwZWIAP3"
+                },
+            
+                {
+                    title: "Vòng Lặp For",
+                    desc: "for – lặp lại công việc tự động",
+                    content: `Vòng lặp giúp tiết kiệm thời gian bằng cách lặp lại thao tác.
+                
+                        Nội dung:
+                        - Vòng lặp for
+                        - Hàm range
+                        - Câu lệnh break
+                        - Câu lệnh continue
+
+                        Kết thúc bài, bạn có thể xử lý lặp hiệu quả.
+                        `,
+                    video: "https://www.youtube.com/embed/SeUdsjQ4G4Y?si=TK1XX85die5L4NlR"
+                },
+
+                {
+                    title: "Vòng Lặp While",
+                    desc: "while – lặp lại công việc tự động",
+                    content: `Vòng lặp giúp tiết kiệm thời gian bằng cách lặp lại thao tác.
+                
+                        Nội dung:
+                        - Vòng lặp while, break, continue
+
+                        Kết thúc bài, bạn có thể xử lý lặp hiệu quả.
+                        `,
+                    video: "https://www.youtube.com/embed/uERy6Qv2rWM?si=BalYPKg5CFZR2vsX"
+                },
+            
+            ],
+
+            4: [
+                {
+                    title: "JavaScript Là Gì?",
+                    desc: "Giới thiệu JavaScript và vai trò trong website",
+                    content: `Trong bài này bạn sẽ làm quen với JavaScript, hiểu JavaScript dùng để làm gì.
+
+                        Nội dung:
+                        - JavaScript là gì?
+                        - Demo 
+
+                        Sau bài này, bạn hiểu tổng quan và bắt đầu với JavaScript.
+                        `,
+                    video: "https://www.youtube.com/embed/Ko3jE3HNtFw?si=fg7bpgI5akqAneD5"
+                },
+            
+                {
+                    title: "Biến và Kiểu Dữ Liệu",
+                    desc: "Các kiểu dữ liệu cơ bản",
+                    content: `Biến dùng để lưu dữ liệu trong chương trình. JavaScript có nhiều cách khai báo biến và kiểu dữ liệu linh hoạt.
+                
+                        Nội dung:
+                        - Kiểu dữ liệu: number, string, boolean...
+                        - Khai báo biến đúng cách
+
+                        Sau bài này, bạn biết sử dụng biến hiệu quả hơn.
+                        `,
+                    video: "https://www.youtube.com/embed/GZJHfL_ih08?si=ha2P4OaNoowOdYdi"
+                },
+            
+                {
+                    title: "Toán Tử Trong JavaScript",
+                    desc: "Các phép toán và xử lý dữ liệu",
+                    content: `Toán tử giúp JS xử lý tính toán và so sánh dữ liệu.
+                
+                        Nội dung:
+                        - Toán tử số học: + - * /
+                        - Toán tử so sánh
+                        - Toán tử logic
+                        - Toán tử 3 ngôi
+
+                        Kết thúc bài, bạn có thể xử lý biểu thức trong JS.
+                        `,
+                    video: "https://www.youtube.com/embed/2vIVb-3SaTk?si=BLLQlQGcDe0D0J7-"
+                },
+            
+                {
+                    title: "Câu Lệnh Điều Kiện",
+                    desc: "if, else if, else, switch case – điều khiển luồng chương trình",
+                    content: `Điều kiện giúp chương trình xử lý nhiều tình huống khác nhau.
+                
+                        Nội dung:
+                        - if
+                        - else
+                        - else if
+                        - switch case
+
+                        Sau bài học này, chương trình của bạn sẽ thông minh hơn.
+                        `,
+                    video: "https://www.youtube.com/embed/tHLejIyIRBM?si=YG_GKuQrjkBGYm59"
+                },
+            
+                {
+                    title: "Vòng Lặp",
+                    desc: "for, while, do-while, for in, for-of – lặp lại thao tác tự động",
+                    content: `Vòng lặp giúp tiết kiệm thời gian xử lý.
+                
+                        Nội dung:
+                        - Vòng lặp for
+                        - Vòng lặp while
+                        - Vòng lặp do-while
+                        - Vòng lặp for-in
+                        - Vòng lặp for-of
+
+                        Kết thúc bài, bạn xử lý được nhiều dữ liệu hơn.
+                        `,
+                    video: "https://www.youtube.com/embed/WfasevyobGY?si=97AX1av0uqmcCSK_"
+                },
+            
+                {
+                    title: "Functions - Mọi thứ về Hàm trong JavaScript",
+                    desc: "Hiểu rõ hàm cách khai báo và sử dụng trong JavaScript",
+                    content: `Hàm (function) giúp chia chương trình thành từng phần nhỏ, tái sử dụng và quản lý dễ dàng hơn.
+
+                        Nội dung:
+                        - Khai báo hàm (function declaration)
+                        - Hàm biểu thức(function expression)
+                        - Hàm mũi tên (Arrow Function)
+                        - Hàm ẩn danh (Anonymous Function)
+                        - Hàm phương thức (Method Function)
+                        - Hàm tạo (Constructor Function)
+
+                        Sau bài học này bạn sẽ hiểu và sử dụng hàm một cách hiệu quả trong JavaScript.
+                        `,
+                    video: "https://www.youtube.com/embed/21IZvHQXpIA?si=n1Xqjmygv0hdaX-4"
+                }
+
+            ]
+        };
+    
+    
+        const p = new URLSearchParams(window.location.search);
+        const courseId = p.get("id") || "1";
+    
+        const lessons = courses[courseId];
+    
+        let current = 0;  
+        let completed = Number(localStorage.getItem("completed_" + courseId)) || 0;
+    
+    
+        function render(){
+            const l = lessons[current];
+        
+            document.getElementById("title").innerText = l.title;
+            document.getElementById("desc").innerText = l.desc;
+            document.getElementById("content").innerText = l.content;
+        
+            document.getElementById("lessonVideo").src = l.video;
+        
+            renderLessonList();
+            updateProgress();
+
+        }
+
+        function renderLessonList(){
+            let html="";
+            lessons.forEach((l,i)=>{
+                let lock = i > current ? "opacity:0.4;pointer-events:none" : "";
+                let active = i === current ? "border:1px solid #1745b3" : "";
+                html += `
+                    <div class="lesson-item" onclick="openLesson(${i})"
+                        style="${lock}${active}">
+                        ${i+1}. ${l.title}
+                    </div>`;
+            });
+            document.getElementById("lessonList").innerHTML = html;
+        }
+    
+    
+        function openLesson(i){
+            if(i > current) return;
+            current = i;
+            localStorage.setItem("lesson_" + courseId, current);
+            render();
+        }
+    
+    
+        function nextLesson(){
+            if(current >= completed){
+                alert("Bạn phải hoàn thành bài hiện tại trước khi sang bài tiếp theo!");
+                return;
+            }
+            if(current < lessons.length-1){
+                current++;
+                localStorage.setItem("lesson_" + courseId, current);
+                render();
+            }
+        }
+    
+        function prevLesson(){
+            if(current > 0){
+                current--;
+                localStorage.setItem("lesson_" + courseId, current);
+                render();
+            }
+        }
+    
+        function complete(){
+            if(completed < lessons.length){
+                completed++;
+                localStorage.setItem("completed_" + courseId, completed);
+            }
+        
+            if(current < lessons.length - 1){
+                current++;
+            }
+        
+            render();
+        }
+    
+    
+    
+        function updateProgress(){
+            let percent = (completed / lessons.length) * 100;
+        
+            document.getElementById("percent").innerText = Math.floor(percent) + "%";
+            document.getElementById("topBar").style.width = percent + "%";
+        
+            document.getElementById("progressText").innerText = `Đã hoàn thành ${completed}/${lessons.length} bài`;
+        }
+    
+        render();
+    </script>
+
+</body>
+</html>
