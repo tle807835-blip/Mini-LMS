@@ -172,15 +172,15 @@ body{
     }
 
     .prev{
-        width: 130px;
-    }
-
-    .complete{
         width: 110px;
     }
 
+    .complete{
+        width: 90px;
+    }
+
     .next{
-        width: 130px;
+        width: 110px;
     }
     
 }
